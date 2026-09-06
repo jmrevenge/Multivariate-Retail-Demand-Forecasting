@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "demand-forecasting-lstm"
+version = "0.1.0"
+description = "Multivariate demand forecasting with LSTMs, benchmarked honestly against seasonal-naive and linear baselines."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+dependencies = ["torch>=2.1", "numpy>=1.24"]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.4", "ruff>=0.4", "matplotlib>=3.7"]
+
+[project.scripts]
+demand-forecast = "demand_forecasting.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["E402"]
+"eval/*" = ["E402"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
